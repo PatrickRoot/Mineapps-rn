@@ -52,7 +52,7 @@
 		CDBB78781F98FA5800F39E23 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD3843D81F98F4C0004DBD91 /* anticon.ttf */; };
 		CDBB78791F98FA5900F39E23 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD3843D81F98F4C0004DBD91 /* anticon.ttf */; };
 		CDBB787A1F98FA5900F39E23 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD3843D81F98F4C0004DBD91 /* anticon.ttf */; };
-		CE6CF556689246C3A60532A0 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D6D70B5B68437F9FB6E1BC /* UserNotifications.framework */; };
+		CE6CF556689246C3A60532A0 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D6D70B5B68437F9FB6E1BC /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FE31B39F913147A08648AA89 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE4BD77341F4ADD9DB3663C /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -344,6 +344,7 @@
 		A1FA9BFAFE904307A0D85C4E /* CFNetwork.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		CD3843D81F98F4C0004DBD91 /* anticon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = anticon.ttf; sourceTree = "<group>"; };
+		CDBCE8711FB43E640033A9D9 /* Mineapps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Mineapps.entitlements; path = Mineapps/Mineapps.entitlements; sourceTree = "<group>"; };
 		DEC07F7CA98D4186A7EE9C65 /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJCoreModule.xcodeproj; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; };
 		FA8992016C4E41F28C95847B /* libRCTJPushModule.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTJPushModule.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -495,6 +496,7 @@
 		13B07FAE1A68108700A75B9A /* Mineapps */ = {
 			isa = PBXGroup;
 			children = (
+				CDBCE8711FB43E640033A9D9 /* Mineapps.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -747,6 +749,14 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 8JBGZJ3ZTU;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1265,8 +1275,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mineapps/Mineapps.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 8JBGZJ3ZTU;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/jcore-react-native/ios/RCTJCoreModule",
@@ -1289,7 +1301,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mineapps/Mineapps.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8JBGZJ3ZTU;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/jcore-react-native/ios/RCTJCoreModule",
