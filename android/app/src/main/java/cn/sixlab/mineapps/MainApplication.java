@@ -1,4 +1,4 @@
-package com.mineapps;
+package cn.sixlab.mineapps;
 
 import android.app.Application;
 
