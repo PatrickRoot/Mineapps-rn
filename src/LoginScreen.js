@@ -79,7 +79,9 @@ class LoginScreen extends Component {
                 <List>
                     <InputItem style={styles.loginInput}
                                labelNumber={2}
-                               placeholder="Input your username/phone/email"
+                               placeholder="请输入用户名"
+                               autoCapitalize={"none"}
+                               clear={true}
                                value={this.state.username}
                                onChange={(value) => {
                                    this.setState({username: value})
@@ -90,7 +92,9 @@ class LoginScreen extends Component {
                     <InputItem type="password"
                                style={styles.loginInput}
                                labelNumber={2}
-                               placeholder="Input your password"
+                               clear={true}
+                               placeholder="请输入密码"
+                               autoCapitalize={"none"}
                                value={this.state.password}
                                onChange={(value)=>{
                                    this.setState({password:value})
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     loginInput: {
-        width: 275,
+        width: 325,
     },
     img: {
         width: 120,

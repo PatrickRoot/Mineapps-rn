@@ -11,24 +11,37 @@
  * @author: Patrick <root@sixlab.cn>
  */
 
-export const NAV_1_BACK = 'NAV_1_BACK';
-export const NAV_1_LIST = 'NAV_1_LIST';
-export const NAV_1_DETAIL = 'NAV_1_DETAIL';
-
-export const NAV_2_BACK = 'NAV_2_BACK';
-export const NAV_2_LIST = 'NAV_2_LIST';
-export const NAV_2_DETAIL = 'NAV_2_DETAIL';
-
-export const NAV_3_BACK = 'NAV_3_BACK';
-export const NAV_3_LIST = 'NAV_3_LIST';
-export const NAV_3_DETAIL = 'NAV_3_DETAIL';
-
 export const TAB_CHANGE = 'TAB_CHANGE';
 
-export const FIRST_LIST_LOADING = 'FIRST_LIST_LOADING';
-export const FIRST_LIST_NO_MORE = 'FIRST_LIST_NO_MORE';
-export const FIRST_LIST_ERROR = 'FIRST_LIST_ERROR';
-export const FIRST_LIST_LOAD_DONE = 'FIRST_LIST_LOAD_DONE';
+export const NAV_HOME_BACK = 'NAV_HOME_BACK';
+export const NAV_HOME_MAIN = 'NAV_HOME_MAIN';
 
-export const FILM_LOAD = 'FILM_LOAD';
-export const SHOW_LOAD = 'SHOW_LOAD';
+export const NAV_TOOLBOX_MAIN = 'NAV_TOOLBOX_MAIN';
+export const NAV_TOOLBOX_BACK = 'NAV_TOOLBOX_BACK';
+
+export const NAV_TOOLBOX_FILM = 'NAV_TOOLBOX_FILM';
+export const NAV_TOOLBOX_SHOW = 'NAV_TOOLBOX_SHOW';
+export const NAV_TOOLBOX_ADD_FILM = 'NAV_TOOLBOX_ADD_FILM';
+export const NAV_TOOLBOX_ADD_SHOW = 'NAV_TOOLBOX_ADD_SHOW';
+
+export const NAV_MY_MAIN = 'NAV_MY_MAIN';
+export const NAV_MY_BACK = 'NAV_MY_BACK';
+
+export const SHOW_LOADING = 'SHOW_LOADING';
+export const SHOW_LOADED = 'SHOW_LOADED';
+export const SHOW_LOAD_ERR = 'SHOW_LOAD_ERR';
+
+export const SHOW_UPDATING = 'SHOW_UPDATING';
+export const SHOW_UPDATED = 'SHOW_UPDATED';
+export const SHOW_UPDATE_ERR = 'SHOW_UPDATE_ERR';
+
+export const FILM_LOADING = 'FILM_LOADING';
+
+export const FILM_LOADED = 'FILM_LOADED';
+export const FILM_LOAD_ERR = 'FILM_LOAD_ERR';
+
+export const FILM_ADDED = 'FILM_ADDED';
+export const FILM_ADD_ERR = 'FILM_ADD_ERR';
+
+export const FILM_UPDATED = 'FILM_UPDATED';
+export const FILM_UPDATE_ERR = 'FILM_UPDATE_ERR';

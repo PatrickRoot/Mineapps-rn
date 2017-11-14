@@ -14,13 +14,10 @@ import {
     StackNavigator,
 } from 'react-navigation';
 
-import MyPage from '../pages/MyPage';
+import MyPage from '../pages/tab/MyPage';
 
 export default FirstNavigator = StackNavigator({
-    FirstList: {
-        screen: MyPage,
-    },
-    FirstDetail: {
+    MyPage: {
         screen: MyPage,
     },
 }, {

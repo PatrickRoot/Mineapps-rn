@@ -15,13 +15,13 @@ import {
     NavigationActions,
 } from 'react-navigation';
 
-import * as TYPES from '../constants/types';
-import HomeNavigator from '../navigators/HomeNavigator';
+import * as TYPES from '../../constants/types';
+import HomeNavigator from '../../navigators/HomeNavigator';
 
 const initialNavState = {
     index: 0,
     routes: [
-        {key: 'FirstList', routeName: 'FirstList'},
+        {key: 'HomePage', routeName: 'HomePage'},
     ],
 };
 
@@ -38,20 +38,19 @@ const initialNavState = {
  */
 export default function (state = initialNavState, action) {
     switch (action.type) {
-        case TYPES.NAV_1_LIST:
-            return HomeNavigator.router.getStateForAction(NavigationActions.navigate({routeName: 'FirstList'}), state);
+        case TYPES.NAV_HOME_MAIN:
+            return HomeNavigator.router.getStateForAction(NavigationActions.navigate({routeName: 'HomePage'}), state);
+        
+        // case TYPES.NAV_HOME_DETAIL:
+        //     return HomeNavigator.router.getStateForAction(NavigationActions.navigate({
+        //         routeName: 'FirstDetail',
+        //         params: {
+        //             order: action.order
+        //         }
+        //     }), state);
 
-        case TYPES.NAV_1_DETAIL:
-            return HomeNavigator.router.getStateForAction(NavigationActions.navigate({
-                routeName: 'FirstDetail',
-                params: {
-                    order: action.order
-                }
-            }), state);
-
-        case TYPES.NAV_1_BACK:
+        case TYPES.NAV_HOME_BACK:
             return HomeNavigator.router.getStateForAction(NavigationActions.back(), state);
-
         default:
             return HomeNavigator.router.getStateForAction(action, state);
     }

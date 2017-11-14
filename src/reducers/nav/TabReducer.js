@@ -10,10 +10,10 @@
  * @time: 2017/9/14 22:28
  * @author: Patrick <root@sixlab.cn>
  */
-import {TAB_CHANGE} from "../constants/types";
+import {TAB_CHANGE} from "../../constants/types";
 
 const initialState = {
-    selectTab: 'homeTab',
+    selectTab: 'toolboxTab',
 };
 
 /**

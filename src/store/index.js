@@ -41,6 +41,7 @@ export default function configureStore(onComplete: () => void) {
         transform: [],
         whitelist: [
             'UserStore',
+            'TabStore',
         ],
     };
     persistStore(store, opt, onComplete);

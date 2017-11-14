@@ -14,4 +14,4 @@ import {Platform} from 'react-native';
 
 export const clientOs = Platform.OS;
 export const clientVersion = Platform.Version;
-export const appVersion = "0.0.1";
+export const appVersion = "0.1.0";

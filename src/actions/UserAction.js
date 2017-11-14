@@ -17,17 +17,31 @@ import {
 import * as TYPES from "../constants/userTypes";
 import {doGet, doPost} from "../utils/Http";
 import {CHECK_LOGIN_URL, LOGIN_URL} from "../constants/urls";
+import moment from 'moment';
 
 /**
  * 检查用户是否登录
  * @returns {*}
  */
 export function checkLogin() {
-    let token = globalStore.getState().UserStore.user.token;
-    
-    if (token) {
-        return (dispatch) => {
+    return (dispatch) => {
+        let token = globalStore.getState().UserStore.user.token;
+        
+        if (token) {
             dispatch({'type': TYPES.CHECK_LOGIN_ING});
+            
+            let expired = globalStore.getState().UserStore.user.expiration;
+            let now = Number(moment().format("x"));
+            let hours = moment.duration(expired - now).hours();
+            if (hours <= 0) {
+                dispatch({
+                    'type': TYPES.CHECK_LOGIN_OUT
+                });
+            } else {
+                dispatch({
+                    'type': TYPES.CHECK_LOGIN_IN
+                });
+            }
             
             // let req = new Promise((resolve, reject) => {
             //
@@ -44,29 +58,29 @@ export function checkLogin() {
             //     }
             // }).catch((e) => {
             // });
-            
-            doGet(CHECK_LOGIN_URL, function (data) {
-                if (data.success) {
-                    if (data.login) {
-                        dispatch({
-                            'type': TYPES.CHECK_LOGIN_IN
-                        });
-                    } else {
-                        dispatch({
-                            'type': TYPES.CHECK_LOGIN_OUT
-                        });
-                    }
-                } else {
-                    Toast.fail(data.message, 1);
-                    dispatch({
-                        'type': TYPES.CHECK_LOGIN_ERROR
-                    });
-                }
-            })
-        }
-    } else {
-        return {
-            'type': TYPES.CHECK_LOGIN_OUT
+            //
+            // doGet(CHECK_LOGIN_URL, function (data) {
+            //     if (data.success) {
+            //         if (data.login) {
+            //             dispatch({
+            //                 'type': TYPES.CHECK_LOGIN_IN
+            //             });
+            //         } else {
+            //             dispatch({
+            //                 'type': TYPES.CHECK_LOGIN_OUT
+            //             });
+            //         }
+            //     } else {
+            //         Toast.fail(data.message, 1);
+            //         dispatch({
+            //             'type': TYPES.CHECK_LOGIN_ERROR
+            //         });
+            //     }
+            // })
+        } else {
+            dispatch({
+                'type': TYPES.CHECK_LOGIN_OUT
+            });
         }
     }
 }
@@ -86,7 +100,10 @@ export function logIn(opt) {
             if (data.success) {
                 dispatch({
                     'type': TYPES.LOGGING_IN,
-                    user: data,
+                    user: {
+                        username: opt.username,
+                        ...data.data,
+                    },
                 });
             } else {
                 Toast.fail(data.message, 1);

@@ -20,22 +20,21 @@ import {
 import {connect} from 'react-redux';
 
 import HomeNavigator from './navigators/HomeNavigator';
-import FilmNavigator from './navigators/FilmNavigator';
-import ShowNavigator from './navigators/ShowNavigator';
+import ToolboxNavigator from './navigators/ToolboxNavigator';
 import MyNavigator from './navigators/MyNavigator';
-import {changeTab} from "./actions/TabAction";
 
+import {changeTab} from "./actions/TabAction";
 
 class ContentScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
-
+    
     render() {
         const {dispatch} = this.props;
         const selectTab = this.props.selectTab;
-
+        
         return (
             <TabBar
                 unselectedTintColor="#949494"
@@ -45,8 +44,8 @@ class ContentScreen extends React.Component {
                 <TabBar.Item
                     title="首页"
                     key="home"
-                        icon={require('../images/homepage.png')}
-                        selectedIcon={require('../images/homepage_fill.png')}
+                    icon={require('../images/homepage.png')}
+                    selectedIcon={require('../images/homepage_fill.png')}
                     selected={selectTab === 'homeTab'}
                     onPress={() => {
                         dispatch(changeTab("homeTab"))
@@ -55,30 +54,33 @@ class ContentScreen extends React.Component {
                 >
                     <HomeNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavHomeStore})}/>
                 </TabBar.Item>
+                
+                {/*<TabBar.Item*/}
+                {/*icon={require('../images/video.png')}*/}
+                {/*selectedIcon={require('../images/video_fill.png')}*/}
+                {/*title="电影"*/}
+                {/*key="film"*/}
+                {/*selected={selectTab === 'filmTab'}*/}
+                {/*onPress={() => {*/}
+                {/*dispatch(changeTab("filmTab"))*/}
+                {/*}}*/}
+                {/*>*/}
+                {/*<FilmNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavFilmStore})}/>*/}
+                {/*</TabBar.Item>*/}
+                
                 <TabBar.Item
-                    icon={require('../images/video.png')}
-                    selectedIcon={require('../images/video_fill.png')}
-                    title="电影"
-                    key="film"
-                    selected={selectTab === 'filmTab'}
+                    icon={require('../images/toolbox.png')}
+                    selectedIcon={require('../images/toolbox_fill.png')}
+                    title="工具箱"
+                    key="toolbox"
+                    selected={selectTab === 'toolboxTab'}
                     onPress={() => {
-                        dispatch(changeTab("filmTab"))
+                        dispatch(changeTab("toolboxTab"))
                     }}
                 >
-                    <FilmNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavFilmStore})}/>
+                    <ToolboxNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavToolboxStore})}/>
                 </TabBar.Item>
-                <TabBar.Item
-                    icon={require('../images/live.png')}
-                    selectedIcon={require('../images/live_fill.png')}
-                    title="电视剧"
-                    key="show"
-                    selected={selectTab === 'showTab'}
-                    onPress={() => {
-                        dispatch(changeTab("showTab"))
-                    }}
-                >
-                    <ShowNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavShowStore})}/>
-                </TabBar.Item>
+                
                 <TabBar.Item
                     icon={require('../images/people.png')}
                     selectedIcon={require('../images/people_fill.png')}
@@ -99,8 +101,7 @@ class ContentScreen extends React.Component {
 function select(store) {
     return {
         NavHomeStore: store.NavHomeStore,
-        NavFilmStore: store.NavFilmStore,
-        NavShowStore: store.NavShowStore,
+        NavToolboxStore: store.NavToolboxStore,
         NavMyStore: store.NavMyStore,
         selectTab: store.TabStore.selectTab,
     }

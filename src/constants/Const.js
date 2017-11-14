@@ -7,17 +7,8 @@
  * For more information, please see
  * https://sixlab.cn/
  *
- * @time: 2017/9/15 15:05
+ * @time: 2017/11/12 18:06
  * @Author: Patrick <root@sixlab.cn>
  */
-import React, {Component} from 'react';
-import {
-    View,
-    Text,
-} from 'react-native';
-
-export default class ShowPage extends Component {
-    render() {
-        return <Text>show</Text>
-    }
-}
+export const MOMENT_FORMAT_DATE = "YYYY-MM-DD";
+export const MOMENT_FORMAT_DATETIME = "YYYY-MM-DD HH:mm:ss";

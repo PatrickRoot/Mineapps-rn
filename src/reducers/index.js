@@ -13,25 +13,24 @@
 import {combineReducers} from 'redux';
 
 import UserReducer from './UserReducer';
-import TabReducer from './TabReducer';
+import TabReducer from './nav/TabReducer';
 
-import NavHomeReducer from './NavHomeReducer';
-import NavFilmReducer from './NavFilmReducer';
-import NavShowReducer from './NavShowReducer';
-import NavMyReducer from './NavMyReducer';
+import NavHomeReducer from './nav/NavHomeReducer';
+import NavToolboxReducer from './nav/NavToolboxReducer';
+import NavMyReducer from './nav/NavMyReducer';
 
-import FilmReducer from './FilmReducer';
-import ShowReducer from './ShowReducer';
+import FilmReducer from './film/FilmReducer';
+import ShowReducer from './show/ShowReducer';
 
 export default combineReducers({
+    
     UserStore: UserReducer,
     TabStore: TabReducer,
-
+    
     NavHomeStore: NavHomeReducer,
-    NavFilmStore: NavFilmReducer,
-    NavShowStore: NavShowReducer,
+    NavToolboxStore: NavToolboxReducer,
     NavMyStore: NavMyReducer,
-
+    
     FilmStore: FilmReducer,
     ShowStore: ShowReducer,
 });

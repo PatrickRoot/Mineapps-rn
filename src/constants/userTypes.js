@@ -8,7 +8,7 @@
  * https://sixlab.cn/
  *
  * @time: 2017/9/14 22:32
- * @author: Patrick <root@sixlab.cn>
+ * @author:Patrick <root@sixlab.cn>
  */
 export const LOGGING_ING = 'LOGGING_ING';
 export const LOGGING_ERROR = 'LOGGING_ERROR';

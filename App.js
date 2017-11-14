@@ -12,30 +12,31 @@
  */
 import React from 'react';
 import {
-    Text,
     View,
+    StyleSheet,
 } from 'react-native';
 import {
+    connect,
     Provider,
 } from 'react-redux';
-// import {
-//     ActivityIndicator,
-// } from 'antd-mobile';
+import {
+    ActivityIndicator,
+} from 'antd-mobile';
 
 import configureStore from './src/store/index';
 import {checkLogin} from "./src/actions/UserAction";
 
-import LoginScreen from "./src/LoginScreen";
-// import ContentScreen from './src/ContentScreen';
+import Index from './src';
 
 globalStore = null;
 
-export default class App extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         let that = this;
         globalStore = configureStore(() => {
-            that.setState({isLoading: false})
+            globalStore.dispatch(checkLogin());
+            that.setState({isLoading: false});
         });
         
         this.state = {
@@ -43,34 +44,32 @@ export default class App extends React.Component {
         }
     }
     
-    componentDidMount() {
-        globalStore.dispatch(checkLogin());
-    }
-    
     render() {
-        // if (this.state.isLoading || globalStore.getState().UserStore.isChecking) {
-        //     return (
-        //         <View>
-        //             <ActivityIndicator
-        //                 text="Loading..."
-        //                 size="large"/>
-        //         </View>
-        //     );
-        // }
+        if (this.state.isLoading || globalStore.getState().UserStore.isChecking) {
+            return (
+                <View style={styles.loginview}>
+                    <ActivityIndicator
+                        text="Loading..."
+                        size="large"/>
+                </View>
+            );
+        }
         return (
             <Provider store={globalStore}>
-                
                 {
-                    globalStore.getState().UserStore.isLoggedIn ?
-                        <View>
-                            <Text>1</Text>
-                            <Text>1</Text>
-                            <Text>1</Text>
-                            <Text>1</Text>
-                        </View>
-                        : <LoginScreen />
+                    <Index/>
                 }
             </Provider>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    loginview: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default App;

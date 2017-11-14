@@ -14,64 +14,87 @@ import * as ClientInfo from "../constants/clientInfo";
 import moment from "moment";
 
 export function doAuthPost(url, data, callback) {
-    doPost(url, data, callback, true)
+    doPost(url, data, callback, true);
 }
 
-export function doAuthGet(url, callback) {
-    doGet(url, callback, true)
+export function doAuthPut(url, data, callback) {
+    doPut(url, data, callback, true);
 }
 
-export function doPost(url, data, callback, needAuth) {
-    let formData = transData(data);
-    
+export function doAuthGet(url, data, callback) {
+    doGet(url, data, callback, true);
+}
+
+export function doPut(url, data, callback, needAuth) {
     let options = {
-        method: 'POST',
-        body: formData,
+        method: 'PUT',
+        body: JSON.stringify(data),
     };
     doFetch(url, options, callback, needAuth);
 }
 
-export function doGet(url, callback, needAuth) {
+export function doPost(url, data, callback, needAuth) {
+    let options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+    };
+    doFetch(url, options, callback, needAuth);
+}
+
+export function doGet(url, data, callback, needAuth) {
     let options = {
         method: 'GET'
     };
+    
+    let param = "";
+    for (let i in data) {
+        let value = data[i];
+        if (typeof value !== undefined && value !== null) {
+            param += i;
+            param += "=";
+            param += value;
+            param += "&";
+        }
+    }
+    if (param != "") {
+        url = url + "?" + param.substr(0, param.length - 1);
+    }
+    
     doFetch(url, options, callback, needAuth);
 }
 
 function doFetch(url, options, callback, needAuth) {
-    let token = "";
-    if(needAuth){
-        token = globalStore.getState().UserStore.user.token;
-    }
+    console.log("请求的路径", url);
+    console.log("请求的参数", options);
     
     var fetchOptions = {
         headers: {
-            'accessToken': token,
             'client': ClientInfo.clientOs,
             'clientVersion': ClientInfo.clientVersion,
             'version': ClientInfo.appVersion,
             'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'application/json'
         },
         ...options
     };
     
+    let token = "";
+    if (needAuth) {
+        token = globalStore.getState().UserStore.user.token;
+        fetchOptions.headers.Authorization = token;
+    }
+    
     fetch(url, fetchOptions)
-        .then((response) => response.text())
-        .then((responseText) => {
-            let data = {};
-            try {
-                data = JSON.parse(responseText);
-            } catch (e) {
-                data = {
-                    success: false,
-                    code: -2,
-                    message: "数据转换失败",
-                }
-            }
+        .then((response) => {
+            console.log(response);
+            return response.json();
+        })
+        .then((data) => {
+            console.log("responseData:", data);
             callback(data);
         })
         .catch(function (err) {
+            console.log("error:", err);
             callback({
                 success: false,
                 code: -1,
@@ -81,55 +104,29 @@ function doFetch(url, options, callback, needAuth) {
         .done();
 }
 
-function transData(data) {
-    let formData = new FormData();
-    
-    if (data) {
-        objectParam(formData, data);
-    }
-    
-    return formData;
-}
-
-function objectParam(formData, data, superKey) {
-    for (let itemKey in data) {
-        let key = itemKey;
-        if (superKey) {
-            key = superKey + "." + itemKey;
-        }
-        let val = data[itemKey];
-        let type = typeof val;
-        switch (type) {
-            case "string":
-            case "number":
-                formData.append(key, val);
-                break;
-            case "boolean":
-                formData.append(key, val ? 1 : 0);
-                break;
-            case "boolean":
-                formData.append(key, val ? 1 : 0);
-                break;
-            case "object":
-                if (null !== val) {
-                    if (val instanceof Array) {
-                        arrayParam(formData, val, key);
-                    } else if (val instanceof Date) {
-                        formData.append(key, moment(val).format("YYYY-MM-DD HH:mm:ss"));
-                    } else if (val instanceof moment) {
-                        formData.append(key, val.format("YYYY-MM-DD HH:mm:ss"));
-                    } else {
-                        objectParam(formData, val, key);
-                    }
-                }
-                break;
-            
-        }
-    }
-}
-
-function arrayParam(formData, vals, key) {
-    for (let item of vals) {
-        formData.append(key, item);
-    }
+export function getDouban(url, callback) {
+    fetch(url)
+        .then((response) => {
+            console.log(response);
+            return response.json();
+        })
+        .then((data) => {
+            console.log("responseData:", data);
+            if (data) {
+                callback({
+                    success: true,
+                    code: 0,
+                    data:data,
+                });
+            }
+        })
+        .catch((error) => {
+            console.log("error:", error);
+            callback({
+                success: false,
+                code: -1,
+                message: error.message,
+            })
+        })
+        .done();
 }
